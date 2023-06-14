@@ -5,6 +5,7 @@ from aiogram import Bot, Dispatcher, executor, types
 from config import token, user_id
 from scraper import get_new_offers
 from aiogram.dispatcher.filters import Text
+from background import keep_alive
 
 bot = Bot(token=token, parse_mode=types.ParseMode.HTML)
 dp = Dispatcher(bot)
@@ -78,6 +79,7 @@ async def offers_every_hour():
         await asyncio.sleep(3600)
 
 
+keep_alive()
 def main():
     loop = asyncio.get_event_loop()
     loop.create_task(offers_every_hour())
